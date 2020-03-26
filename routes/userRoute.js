@@ -104,18 +104,18 @@ router.post('/user/login',
     User.findOne({ email })
       .then((user) => {
         if (!user) {
-          return res.status(404).json({ msg: 'User not found' });
+          return res.status(400).json({ msg: 'user not found' });
         }
 
         bcrypt.compare(password, user.password, (err, result) => {
           if (err) {
             res.status(500).json({
-              msg: 'server error',
+              msg: 'server error compare',
             });
           }
 
           if (!result) {
-            return res.status(204).json({
+            return res.status(400).json({
               msg: 'password doesnot match',
             });
           }
@@ -126,14 +126,16 @@ router.post('/user/login',
             email: user.email,
           }, 'SECRET', { expiresIn: '24h' });
 
-          return res.status(200).json({
+          res.status(200).json({
             msg: 'login succesfull',
             token: `Bearer ${token}`,
           });
+          return 0;
         });
         return 0;
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error);
         res.status(500).json({ msg: 'server error ' });
       });
     return 0;
