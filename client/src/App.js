@@ -17,20 +17,21 @@ if (localStorage.token) {
 
 function App() {
   return (
-    <AuthState>    
+       <AuthState>
         <Router>
         <Navbar />
           <div className="">
           
             <Switch>
-              <PrivateRoute exact path='/' component={Home} />
+              <Route exact path='/' component={Home} />
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
             </Switch>
           </div>
           <Footer/>
         </Router>
-    </AuthState>
+        </AuthState>
+   
   );
 }
 export default App;
