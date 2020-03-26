@@ -59,14 +59,14 @@ const config={
     }
 }
 try{
-    const res=await axios.post('/user/register',userData,config)
+    const res=await axios.post('api/user/register',userData,config)
     dispatch({
 type:SUCCES_REGISTER,
 payload:res.data
     })
 
 }catch (err){  
-    
+   
    dispatch({
        type:FAIL_REGISTER,
        payload:err.response.data
@@ -84,14 +84,14 @@ payload:res.data
             }
         }
         try{
-            const res=await axios.post('/user/login',userData,config)
+            const res=await axios.post('api/user/login',userData,config)
             dispatch({
         type:SUCCES_LOGIN,
         payload:res.data
             })
         
         }catch (err){
-            
+        
            dispatch({
                type:FAIL_LOGIN,
                payload:err.response.data
